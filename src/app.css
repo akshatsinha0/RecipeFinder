@@ -1,2 +1,137 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
+/* File: src/app.css */
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@layer base {
+  html {
+    font-family: "Puritan", sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background: linear-gradient(
+      to bottom right,
+      rgb(248 250 252),  /* slate-50 */
+      rgb(241 245 249)   /* slate-100 */
+    );
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Custom components */
+  .ingredient-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #d1fae5; /* emerald-100 */
+    color: #065f46; /* emerald-800 */
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem;
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem;
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    margin-right: 0.5rem; /* mr-2 */
+    margin-bottom: 0.5rem; /* mb-2 */
+    transition: all 0.2s;
+  }
+
+  .ingredient-tag:hover {
+    background-color: #a7f3d0; /* emerald-200 */
+    transform: scale(1.05);
+  }
+
+  .recipe-card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* shadow-md */
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .recipe-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); /* shadow-xl */
+    transform: translateY(-0.25rem); /* -translate-y-1 */
+  }
+
+  .recipe-card img {
+    transition-property: transform;
+    transition-duration: 700ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  .recipe-card:hover img {
+    transform: scale(1.05);
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  /* Utility classes */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f1f5f9; /* slate-100 */
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #6ee7b7; /* emerald-300 */
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #34d399; /* emerald-400 */
+  }
+
+  /* Ripple effect */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+  }
+}
