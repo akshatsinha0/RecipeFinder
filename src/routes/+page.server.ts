@@ -18,7 +18,7 @@ export const actions: Actions = {
       
       const recipes: Recipe[] = await response.json();
       return { recipes };
-    } catch (_error) {
+    } catch {
       return { error: 'Failed to fetch recipes. Please try again.' };
     }
   }
