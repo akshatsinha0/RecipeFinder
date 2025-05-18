@@ -77,6 +77,15 @@
     {/if}
     
     <form method="POST" on:submit={handleSearch} class="bg-white rounded-xl p-6 shadow-lg mb-8">
+      {#if form?.error}
+        <div class="mb-4 p-3 bg-red-50 text-red-700 rounded-md border border-red-200">
+          <p class="font-medium">{form.error}</p>
+          {#if form.error.includes('API key')}
+            <p class="text-sm mt-1">Please check your Spoonacular API key configuration.</p>
+          {/if}
+        </div>
+{     /if}
+
       <IngredientSearch bind:initialIngredients={searchValue} on:change={e => searchValue = e.detail} />
       
       <div class="mt-6">
